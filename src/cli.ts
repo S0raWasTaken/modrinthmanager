@@ -9,7 +9,8 @@ import fs from 'fs-extra';
 import { ConfigManager } from './config';
 import { ModrinthAPI } from './api';
 import { ModrinthConfig } from './types';
-const keypress = require('keypress'); // GUESS WHAT? THIS SHIT ISN'T TYPEDDD
+// @ts-ignore
+import keypress from 'keypress'; // GUESS WHAT? THIS SHIT ISN'T TYPEDDD
 
 
 async function interactivePagination(
