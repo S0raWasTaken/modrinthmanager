@@ -50,20 +50,22 @@ chmod +x "$BIN_DIR/mr" || fatal "Permission denied while executing 'chmod +x $BI
 # Add to PATH if not already there
 if [[ ":$PATH:" != *":$BIN_DIR:"* ]]; then
     echo "Adding to PATH..."
-    
+    echo ""
     # Only update shell configs that exist
     if [[ -f "$HOME/.bashrc" ]]; then
         echo "export PATH=\"\$PATH:$BIN_DIR\"" >> "$HOME/.bashrc"
+        echo "Please restart your terminal or run:"
+        echo "source ~/.bashrc"
     fi
-    
     if [[ -f "$HOME/.zshrc" ]]; then
         echo "export PATH=\"\$PATH:$BIN_DIR\"" >> "$HOME/.zshrc"
+        echo "Please restart your terminal or run:"
+        echo "source ~/.zshrc"
     fi
-    
-    echo ""
-    echo "Please restart your terminal or run:"
-    [[ -f "$HOME/.bashrc" ]] && echo "  source ~/.bashrc"
-    [[ -f "$HOME/.zshrc" ]] && echo "  source ~/.zshrc"
+    if [[ ! -f "$HOME/.bashrc" && ! -f "$HOME/.zshrc" ]]; then
+       echo "Couldn't find either .bashrc or .zshrc"
+       echo "Please add $BIN_DIR to your \$PATH"
+    fi
 else
     echo "Already in PATH."
 fi
